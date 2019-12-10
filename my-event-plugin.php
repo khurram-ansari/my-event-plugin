@@ -113,7 +113,7 @@ global $wpdb;
         $status=$wpdb->delete(get_table_name(),array(
             "id"=>$_REQUEST['id']
         ));
-        if ($status!=false){
+        if ($status==1){
             echo json_encode(array("status"=>1,"message"=>"Event Deleted"));
         }
         else {
