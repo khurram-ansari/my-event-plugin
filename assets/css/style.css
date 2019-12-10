@@ -1,4 +1,4 @@
 /* myyyyy css */
-#addeventform label.error,#thumberror{
+#addeventform label.error,#editeventform label.error,#thumberror{
     color: red;
 }

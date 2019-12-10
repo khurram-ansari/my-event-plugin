@@ -76,14 +76,50 @@ function event_plugin_library_ajax_handler(){
 global $wpdb;
     if ($_REQUEST['param']=="add_event_data"){
     // add event to table
-    $wpdb->insert(get_table_name(),array(
+    $status=$wpdb->insert(get_table_name(),array(
         "title"=>$_REQUEST['txttitle'],
         "description"=>$_REQUEST['txtdescription'],
         "thumb"=>$_REQUEST['thumburl'],
         "date"=>$_REQUEST['txtdate'],
         "slug"=>$_REQUEST['txtslug']
     ));
-    echo json_encode(array("status"=>1,"message"=>"Event Added"));
+    if ($status==1){
+    echo json_encode(array("status"=>1,"message"=>"Event Added"));}
+    else {
+        echo json_encode(array("status"=>2,"message"=>"Event not Added"));
+    }
+    }
+    if ($_REQUEST['param']=="edit_event_data"){
+        // add event to table
+        $status=$wpdb->update(get_table_name(),array(
+            "title"=>$_REQUEST['txttitle'],
+            "description"=>$_REQUEST['txtdescription'],
+            "thumb"=>$_REQUEST['thumburl'],
+            "date"=>$_REQUEST['txtdate'],
+            "slug"=>$_REQUEST['txtslug']
+        ),array(
+            "id"=>$_REQUEST['event_id']
+        ));
+        if ($status==1){
+        echo json_encode(array("status"=>1,"message"=>"Event Edited"));
+        }
+        else {
+            echo json_encode(array("status"=>2,"message"=>"Event not Edited"));
+
+        }
+    }
+    if ($_REQUEST['param']=="delete_event_data"){
+        // add event to table
+        $status=$wpdb->delete(get_table_name(),array(
+            "id"=>$_REQUEST['id']
+        ));
+        if ($status!=false){
+            echo json_encode(array("status"=>1,"message"=>"Event Deleted"));
+        }
+        else {
+            echo json_encode(array("status"=>2,"message"=>"Event not Deleted"));
+
+        }
     }
     wp_die();
 }

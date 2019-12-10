@@ -15,6 +15,7 @@ $(document).ready(function () {
        });
 });
 $(function (){
+    // add event post request handler
     $("#addeventform").validate({
     submitHandler:function(){
     if ($("#thumburl").val()!=""){
@@ -24,12 +25,57 @@ $(function (){
             if(data.status==1){
                 $("#addeventbtn").notify(data.message,{position:"right",className:"success"});
             }
+            else if(data.status==2){
+                $("#addeventbtn").notify(data.message,{position:"right",className:"error"});
+            }
         });
     
     }
 }
-    })
     });
+    // edit event post request handler
+    $("#editeventform").validate({
+        submitHandler:function(){
+            if ($("#thumburl").val()!=""){
+                var post_data=$("#editeventform").serialize()+"&action=event_plugin_library&param=edit_event_data";
+                $.post(ajaxurl,post_data,function(response){
+                    var data=$.parseJSON(response);
+                    if(data.status==2){
+                        $("#editeventbtn").notify(data.message,{position:"right",className:"error"});
+                    }
+                    else if(data.status==1){
+                        $("#editeventbtn").notify(data.message,{position:"right",className:"success"});
+                        setTimeout(function () {
+                            location.reload();
+                        },1300);
+                    }
+                });
+
+            }
+        }
+    });
+    //delete event handler
+    $(".deleteeventbtn").click(function () {
+        var conf=confirm("Are you sure , you want to delete ?");
+        if (conf) {
+            var eventid = $(this).attr("data-id");
+            var post_data = "action=event_plugin_library&param=delete_event_data&id=" + eventid;
+            $.post(ajaxurl, post_data, function (response) {
+                var data = $.parseJSON(response);
+                console.log(data.status);
+                if (data.status == 1) {
+                    $.notify(data.message, {position: "bottom center", className: "success"});
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1300);
+                } else if (data.status == 2) {
+                    $.notify(data.message, {position: "bottom center", className: "error"});
+                }
+            });
+        }
+
+});
+});
 
 $(function (){
 $("#txtthumb").on("click",function(){
@@ -47,4 +93,4 @@ $("#thumburl").val(selectedimg.url);
 console.log(selectedimg.url);
 });
     });
-})    
+});

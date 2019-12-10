@@ -8,7 +8,7 @@ $allevents=$wpdb->get_results(
 <table id="allevents_table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">ID</th>
+      <th scope="col">S No</th>
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">Slug</th>
@@ -20,16 +20,17 @@ $allevents=$wpdb->get_results(
   <tbody>
    <?php 
    if (count($allevents)>0){
+       $i=1;
        foreach($allevents as $key=>$value){
            ?>
            <tr>
-           <td><?php echo $value['id']; ?></td>
+           <td><?php echo $i; ?></td>
            <td><?php echo $value['title']; ?></td>
            <td><?php echo $value['description']; ?></td>
            <td><?php echo $value['slug']; ?></td>
            <td><?php echo $value['date']; ?></td>
            <td><img src="<?php echo $value['thumb']; ?>" style="height:50px;width:50px;"></td>
-           <td><a class="btn btn-primary" href="http://localhost/event_plugin/wp-admin/admin.php?page=edit-event-plugin" data-id="<?php echo $value['id']?>">Edit</a>&nbsp;<button class="btn btn-danger" data-id="<?php echo $value['id']?>">Delete</button></td>
+           <td><a class="btn btn-primary" href="admin.php?page=edit-event-plugin&edit_id=<?php echo $value['id']?>">Edit</a>&nbsp;<a href="javascript:void(0)" class="btn btn-danger deleteeventbtn" id="deleteeventbtn" data-id="<?php echo $value['id']?>">Delete</a></td>
 
 
 
@@ -44,6 +45,7 @@ $allevents=$wpdb->get_results(
            
            
            <?php
+           $i++;
        }
    }
    ?>
