@@ -90,7 +90,7 @@ global $wpdb;
     }
     }
     if ($_REQUEST['param']=="edit_event_data"){
-        // add event to table
+        // edit event to table
         $status=$wpdb->update(get_table_name(),array(
             "title"=>$_REQUEST['txttitle'],
             "description"=>$_REQUEST['txtdescription'],

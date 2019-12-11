@@ -24,7 +24,7 @@ $event=$wpdb->get_row(
     <label for="txtthumb">Thumb</label>
     <input type="button" value="Upload Thumb Image" class="form-control btn btn-primary" id="txtthumb" >
     <img id="thumbimg"  src="<?php echo $event['thumb'];?>" style="width: 100px;height: 100px;">
-    <input type="hidden" id="thumburl" name="thumburl" >
+    <input type="hidden" id="thumburl" name="thumburl" value="<?php echo $event['thumb'];?>">
     <span class="thumberror" id="thumberror"></span>
   </div>
   <div class="form-group">
