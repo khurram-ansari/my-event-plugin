@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 
-    $('.hee').slick({
+    $('.main-eps').slick({
         dots: true,
         infinite: false,
         speed: 300,
