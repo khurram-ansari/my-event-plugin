@@ -1,7 +1,5 @@
-<?php 
-global $wpdb;
-$allevents=$wpdb->get_results(
-    $wpdb->prepare("select * from ". get_table_name() ." order by date ASC",""),ARRAY_A);
+<?php
+$allevents=display_events_from_db();
 ?>
 <div class="container">
 <h1 style="text-align:center;">All Events</h1>

@@ -46,12 +46,15 @@ function link_assets(){
 wp_enqueue_style( "my-event-style", PLUGIN_DIR_URL."assets/css/style.css");
 wp_enqueue_style( "bootstrap-library-css", PLUGIN_DIR_URL."assets/css/bootstrap.min.css");
 wp_enqueue_style( "datatable-library-css", PLUGIN_DIR_URL."assets/css/datatables.min.css");
+wp_enqueue_style( "slick-library-css", PLUGIN_DIR_URL."assets/slick/slick.css");
+wp_enqueue_style( "slicktheme-library-css", PLUGIN_DIR_URL."assets/slick/slick-theme.css");
 wp_enqueue_script( "jqeury-library", PLUGIN_DIR_URL."assets/js/jquery.min.js","","",true);
 wp_enqueue_script( "my-event-script", PLUGIN_DIR_URL."assets/js/script.js","","",true);
 wp_enqueue_script( "notify-library", PLUGIN_DIR_URL."assets/js/notify.min.js","","",true);
 wp_enqueue_script( "jquery-validate-library", PLUGIN_DIR_URL."assets/js/validate.min.js","","",true);
 wp_enqueue_script( "bootstrap-library-js", PLUGIN_DIR_URL."assets/js/bootstrap.min.js","","",true);
 wp_enqueue_script( "datatable-library-js", PLUGIN_DIR_URL."assets/js/datatables.min.js","","",true);
+wp_enqueue_script( "slick-library-js", PLUGIN_DIR_URL."assets/slick/slick.min.js","","",true);
 
 
 wp_localize_script( "my-event-script", "ajaxurl",admin_url( "admin-ajax.php"));
@@ -155,3 +158,14 @@ function drop_event_plugin_table(){
     $wpdb->query("Drop table IF EXISTS `".$wp_track_table."`");
 }
 register_deactivation_hook( __FILE__, "drop_event_plugin_table" );
+
+add_shortcode("myeventplugin","short_code_view");
+function short_code_view(){
+    include PLUGIN_DIR_PATH.'views/shortcode-template.php';
+}
+function display_events_from_db(){
+    global $wpdb;
+    $allevents=$wpdb->get_results(
+        $wpdb->prepare("select * from ". get_table_name() ." order by date ASC",""),ARRAY_A);
+    return $allevents;
+}
