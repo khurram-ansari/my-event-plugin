@@ -161,7 +161,11 @@ register_deactivation_hook( __FILE__, "drop_event_plugin_table" );
 
 add_shortcode("myeventplugin","short_code_view");
 function short_code_view(){
+    ob_start();
     include PLUGIN_DIR_PATH.'views/shortcode-template.php';
+    $content=ob_get_contents();
+    ob_end_clean();
+    return $content;
 }
 function display_events_from_db(){
     global $wpdb;
