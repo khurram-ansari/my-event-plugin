@@ -61,10 +61,14 @@ $(function (){
             var data=$.parseJSON(response);
             if(data.status==1){
                 $("#addeventbtn").notify(data.message,{position:"right",className:"success"});
+                setTimeout(function () {
+                    location.reload();
+                },1300);
             }
             else if(data.status==2){
                 $("#addeventbtn").notify(data.message,{position:"right",className:"error"});
             }
+
         });
     
     }
@@ -96,7 +100,9 @@ $(function (){
         var conf=confirm("Are you sure , you want to delete ?");
         if (conf) {
             var eventid = $(this).attr("data-id");
-            var post_data = "action=event_plugin_library&param=delete_event_data&id=" + eventid;
+            var eventslug = $(this).attr("data-slug");
+            var post_data = "action=event_plugin_library&param=delete_event_data&id="+eventid+"&event_slug="+eventslug;
+
             $.post(ajaxurl, post_data, function (response) {
                 var data = $.parseJSON(response);
                 console.log(data.status);

@@ -18,26 +18,26 @@
 }
 .event-title{
     color: black;
-    font-size: 28px;
+    font-size: 2vw;
     font-weight: bold;
 }
 .event-desc{
     color: #6c757d;
     text-align: left;
-    font-size: 20px;
+    font-size: 1.5vw;
     height: 50px;
 }
 .event-date{
     color: #4f4848;
     text-align: left;
-    font-size: 15px;
+    font-size: 1.5vw;
     font-weight: bold;
 }
 .img-cont{
     width: 100%;
 }
 .event-thumb{
-    object-fit: contain;
+    object-fit: cover;
     height: 200px;
     width: 100%;
 }

@@ -1,5 +1,9 @@
 <?php
 $allevents=display_events_from_db();
+function get_link_by_slug($slug, $type = 'post'){
+    $post = get_page_by_path($slug, OBJECT, $type);
+    return get_permalink($post->ID);
+}
 ?>
 <div class="main-eps">
     <?php
@@ -11,7 +15,7 @@ $allevents=display_events_from_db();
             <img src="<?php echo $value['thumb'] ?>" class="event-thumb">
         </div>
         <div class="textcont">
-            <a href="<?php echo $value['slug']; ?>"><p class="event-title"><?php echo $value['title'] ?></p></a>
+            <a href="<?php echo get_link_by_slug($value['slug']); ?>"><p class="event-title"><?php echo $value['title'] ?></p></a>
             <p class="event-desc">
                 <?php
                 $aa=$value['description'];

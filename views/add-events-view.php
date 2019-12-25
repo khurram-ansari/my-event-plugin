@@ -1,4 +1,4 @@
-<?php wp_enqueue_media(); ?>
+<?php wp_enqueue_media();?>
 <div class="container">
 <h1 style="text-align:center;">Add New Event</h1>
 <form  action="#" id="addeventform" >
@@ -16,14 +16,14 @@
   </div>
   <div class="form-group">
     <label for="txtthumb">Thumb</label>
-    <input type="button" value="Upload Thumb Image" class="form-control btn btn-primary" id="txtthumb" >
+    <input type="button" value="Upload Thumb Image" class="form-control btn btn-danger" id="txtthumb" >
     <img id="thumbimg"  src="">
     <input type="hidden" id="thumburl" name="thumburl" >
     <span class="thumberror" id="thumberror"></span>
   </div>
   <div class="form-group">
     <label for="txtslug">Slug</label>
-    <input type="text" name="txtslug" class="form-control" required id="txtslug" placeholder="Enter Event Slug" >
+    <input type="text" name="txtslug" class="form-control" required id="txtslug" placeholder="Enter Event Slug (It must be unique)" >
   </div>
   <button type="submit" id="addeventbtn" class="btn btn-primary">Submit</button>
 </form></div>
