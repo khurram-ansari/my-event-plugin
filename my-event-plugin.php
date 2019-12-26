@@ -188,6 +188,7 @@ function drop_event_plugin_table(){
     global $wpdb;
     $wp_track_table=get_table_name();
     $wpdb->query("Drop table IF EXISTS `".$wp_track_table."`");
+    delete_all_posts_on_deactivation();
     delete_category_on_deactivation();
 
 }
@@ -240,4 +241,14 @@ function update_post_dynamically($id,$pst_title,$pst_date,$pst_desc,$pst_slug,$p
 }
 function delete_post_dynamically($pstid){
 wp_delete_post($pstid);
+}
+function delete_all_posts_on_deactivation(){
+    $myposts=get_posts(
+        array('category'=> get_option('wpdocs_cat_id'))
+    );
+    if ($myposts){
+        foreach ($myposts as $posts){
+            wp_delete_post($posts->ID);
+        }
+    }
 }
